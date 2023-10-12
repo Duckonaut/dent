@@ -1,0 +1,18 @@
+[package]
+name = "cdent"
+version = "0.1.0"
+edition = "2021"
+authors = ["Duckonaut"]
+readme = "README.md"
+description = "A C bindings library for dent-parse"
+license = "MIT"
+repository = "https://github.com/Duckonaut/dent"
+homepage = "https://github.com/Duckonaut/dent"
+documentation = "https://docs.rs/cdent"
+keywords = ["dent",, "format", "data", "c", "bindings"]
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+dent-parse = { path = "../dent-parse" }

@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "dent-parse",
+    "cdent",
+    "dentq"
+]
+
+exclude = [
+    "examples",
+]

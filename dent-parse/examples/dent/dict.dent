@@ -1,0 +1,10 @@
+# Defines a person
+{
+    name: Mario
+    skills: [
+        jumps
+        grows
+    ]
+    age: 35
+    alive: true
+}
