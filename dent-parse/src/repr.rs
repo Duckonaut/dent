@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, fmt::Display};
 
 /// Value type returned by Dent.
 ///
@@ -195,35 +195,27 @@ impl<'s> std::ops::IndexMut<usize> for Value<'s> {
     }
 }
 
-impl<'s> ToString for Value<'s> {
-    fn to_string(&self) -> String {
+impl<'s> Display for Value<'s> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Value::None => "none".to_string(),
-            Value::Str(s) => s.to_string(),
-            Value::Int(i) => i.to_string(),
-            Value::Float(f) => f.to_string(),
-            Value::Bool(b) => b.to_string(),
+            Value::None => write!(f, "none"),
+            Value::Str(s) => write!(f, "{}", s),
+            Value::Int(i) => write!(f, "{}", i),
+            Value::Float(fl) => write!(f, "{}", fl),
+            Value::Bool(b) => write!(f, "{}", b),
             Value::List(l) => {
-                let mut s = String::new();
-                s.push('[');
+                write!(f, "[")?;
                 for v in l.iter() {
-                    s.push(' ');
-                    s.push_str(&v.to_string());
+                    write!(f, " {}", v)?;
                 }
-                s.push_str(" ]");
-                s
+                write!(f, " ]")
             }
             Value::Dict(d) => {
-                let mut s = String::new();
-                s.push('{');
+                write!(f, "{{")?;
                 for (k, v) in d.iter() {
-                    s.push(' ');
-                    s.push_str(k);
-                    s.push_str(": ");
-                    s.push_str(&v.to_string());
+                    write!(f, " {}: {}", k, v)?;
                 }
-                s.push_str(" }");
-                s
+                write!(f, " }}")
             }
         }
     }
